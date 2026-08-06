@@ -22,17 +22,20 @@ function AddWaste() {
     e.preventDefault();
 
     try {
-      await axios.post(" https://waste2value-backend.onrender.com", {
-        title: formData.title,
-        category: formData.category,
-        description: formData.title,
-        quantity: Number(formData.quantity),
-        unit: "kg",
-        expectedPrice: Number(formData.price),
-        location: formData.location,
-        quality: "Medium",
-        images: []
-      });
+      await axios.post(
+  "https://waste2value-backend.onrender.com/api/listings",
+  {
+    title: formData.title,
+    category: formData.category,
+    description: formData.title,
+    quantity: Number(formData.quantity),
+    unit: "kg",
+    expectedPrice: Number(formData.price),
+    location: formData.location,
+    quality: "Medium",
+    images: []
+  }
+);
 
       alert("Waste listing added successfully!");
 
