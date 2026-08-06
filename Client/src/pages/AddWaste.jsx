@@ -34,6 +34,7 @@ function AddWaste() {
     location: formData.location,
     quality: "Medium",
     images: []
+    seller: "Guest User"
   }
 );
 
@@ -44,6 +45,7 @@ function AddWaste() {
         category: "",
         quantity: "",
         price: "",
+        
         location: ""
       });
     } catch (error) {
