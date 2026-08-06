@@ -22,7 +22,7 @@ function AddWaste() {
     e.preventDefault();
 
     try {
-      await axios.post("https://waste2value-backend.onrender.com/api/listings", {
+      await axios.post(" https://waste2value-backend.onrender.com", {
         title: formData.title,
         category: formData.category,
         description: formData.title,
