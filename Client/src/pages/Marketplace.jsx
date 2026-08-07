@@ -6,20 +6,22 @@ function Marketplace() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+useEffect(() => {
+  const fetchListings = async () => {
+    try {
+      const res = await axios.get(
+        "https://waste2value-backend.onrender.com/api/listings"
+      );
+      setListings(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        const res = await axios.get(
-          "https://waste2value-backend.onrender.com/api/listings"
-        );
-        setListings(res.data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  fetchListings();
+}, []);
 
     fetchListings();
   }, []);
