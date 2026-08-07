@@ -6,29 +6,35 @@ function Marketplace() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-useEffect(() => {
-  const fetchListings = async () => {
-    try {
-      const res = await axios.get(
-        "https://waste2value-backend.onrender.com/api/listings"
-      );
-      setListings(res.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [category, setCategory] = useState("All");
 
-  fetchListings();
-}, []);
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const res = await axios.get(
+          "https://waste2value-backend.onrender.com/api/listings"
+        );
+        setListings(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchListings();
   }, []);
-  const filteredListings = listings.filter((item) =>
-    item.title.toLowerCase().includes(search.toLowerCase()) ||
-    item.location.toLowerCase().includes(search.toLowerCase())
-);
+
+  const filteredListings = listings.filter((item) => {
+    const matchesSearch =
+      item.title.toLowerCase().includes(search.toLowerCase()) ||
+      item.location.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory =
+      category === "All" || item.category === category;
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div
@@ -45,25 +51,48 @@ useEffect(() => {
         <h1 style={{ color: "#22c55e", marginBottom: "30px" }}>
           Waste Marketplace
         </h1>
+
         <input
-  type="text"
-  placeholder="Search by waste name or location..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-  style={{
-    width: "100%",
-    padding: "12px",
-    marginBottom: "20px",
-    borderRadius: "10px",
-    border: "none",
-    background: "#1e293b",
-    color: "white"
-  }}
-/>
+          type="text"
+          placeholder="Search by waste name or location..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "20px",
+            borderRadius: "10px",
+            border: "none",
+            background: "#1e293b",
+            color: "white"
+          }}
+        />
+
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "20px",
+            borderRadius: "10px",
+            border: "none",
+            background: "#1e293b",
+            color: "white"
+          }}
+        >
+          <option value="All">All Categories</option>
+          <option value="Plastic">Plastic</option>
+          <option value="Metal">Metal</option>
+          <option value="Paper">Paper</option>
+          <option value="E-Waste">E-Waste</option>
+          <option value="Glass">Glass</option>
+          <option value="Organic">Organic</option>
+        </select>
 
         {loading ? (
           <p>Loading listings...</p>
-        ) : listings.length === 0 ? (
+        ) : filteredListings.length === 0 ? (
           <p>No listings available.</p>
         ) : (
           <div
@@ -88,8 +117,12 @@ useEffect(() => {
                 </h3>
 
                 <p><strong>Category:</strong> {item.category}</p>
-                <p><strong>Quantity:</strong> {item.quantity} {item.unit}</p>
-                <p><strong>Expected Price:</strong> ₹{item.expectedPrice}</p>
+                <p>
+                  <strong>Quantity:</strong> {item.quantity} {item.unit}
+                </p>
+                <p>
+                  <strong>Expected Price:</strong> ₹{item.expectedPrice}
+                </p>
                 <p><strong>Location:</strong> {item.location}</p>
                 <p><strong>Status:</strong> {item.status}</p>
               </div>
@@ -99,6 +132,6 @@ useEffect(() => {
       </div>
     </div>
   );
-
+}
 
 export default Marketplace;
