@@ -115,7 +115,6 @@ function Marketplace() {
                 <h3 style={{ color: "#22c55e", marginBottom: "10px" }}>
                   {item.title}
                 </h3>
-
                 <p><strong>Category:</strong> {item.category}</p>
                 <p>
                   <strong>Quantity:</strong> {item.quantity} {item.unit}
