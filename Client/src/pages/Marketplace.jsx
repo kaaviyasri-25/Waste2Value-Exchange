@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 function Marketplace() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -22,6 +23,10 @@ function Marketplace() {
 
     fetchListings();
   }, []);
+  const filteredListings = listings.filter((item) =>
+    item.title.toLowerCase().includes(search.toLowerCase()) ||
+    item.location.toLowerCase().includes(search.toLowerCase())
+);
 
   return (
     <div
@@ -38,6 +43,21 @@ function Marketplace() {
         <h1 style={{ color: "#22c55e", marginBottom: "30px" }}>
           Waste Marketplace
         </h1>
+        <input
+  type="text"
+  placeholder="Search by waste name or location..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "12px",
+    marginBottom: "20px",
+    borderRadius: "10px",
+    border: "none",
+    background: "#1e293b",
+    color: "white"
+  }}
+/>
 
         {loading ? (
           <p>Loading listings...</p>
@@ -51,7 +71,7 @@ function Marketplace() {
               gap: "20px"
             }}
           >
-            {listings.map((item) => (
+            {filteredListings.map((item) => (
               <div
                 key={item._id}
                 style={{
