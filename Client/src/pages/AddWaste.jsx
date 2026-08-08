@@ -21,7 +21,7 @@ setFormData({
 const handleSubmit = async (e) => {
 e.preventDefault();
 
-```
+
 try {
   await axios.post(
     "https://waste2value-backend.onrender.com/api/listings",
@@ -52,7 +52,7 @@ try {
   console.error(error.response?.data || error.message);
   alert(JSON.stringify(error.response?.data || error.message));
 }
-```
+
 
 };
 
@@ -141,7 +141,7 @@ fontFamily: "Arial"
     </form>
   </div>
 </div>
-```
+
 
 );
 }
