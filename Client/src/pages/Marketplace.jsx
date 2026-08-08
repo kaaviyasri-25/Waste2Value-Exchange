@@ -61,6 +61,34 @@ const handleDelete = async (id) => {
     alert("Failed to delete listing");
   }
 };
+const handleEdit = async (item) => {
+  const newPrice = prompt(
+    "Enter new expected price:",
+    item.expectedPrice
+  );
+
+  if (newPrice === null) return;
+
+  try {
+    const res = await axios.put(
+      `https://waste2value-backend.onrender.com/api/listings/${item._id}`,
+      {
+        expectedPrice: Number(newPrice)
+      }
+    );
+
+    setListings((prev) =>
+      prev.map((listing) =>
+        listing._id === item._id ? res.data : listing
+      )
+    );
+
+    alert("Listing updated successfully!");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to update listing");
+  }
+};
 
 return (
 <div
@@ -163,8 +191,25 @@ fontFamily: "Arial"
     fontWeight: "bold",
     cursor: "pointer"
   }}
+  
 >
   Delete Listing
+</button>
+<button
+  onClick={() => handleEdit(item)}
+  style={{
+    marginTop: "10px",
+    width: "100%",
+    padding: "10px",
+    border: "none",
+    borderRadius: "10px",
+    background: "#2563eb",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer"
+  }}
+>
+  Edit Listing
 </button>
           </div>
         ))}
