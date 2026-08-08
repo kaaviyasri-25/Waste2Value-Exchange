@@ -10,12 +10,36 @@ quantity: "",
 price: "",
 location: ""
 });
+const estimatePrice = (category, quantity) => {
+  const rates = {
+    Plastic: 18,
+    Metal: 42,
+    Paper: 10,
+    "E-Waste": 65,
+    Glass: 8,
+    Organic: 5
+  };
+
+  const rate = rates[category] || 12;
+  return rate * Number(quantity || 0);
+};
 
 const handleChange = (e) => {
-setFormData({
-...formData,
-[e.target.name]: e.target.value
-});
+  const { name, value } = e.target;
+
+  const updatedData = {
+    ...formData,
+    [name]: value
+  };
+
+  if (name === "category" || name === "quantity") {
+    updatedData.price = estimatePrice(
+      name === "category" ? value : updatedData.category,
+      name === "quantity" ? value : updatedData.quantity
+    );
+  }
+
+  setFormData(updatedData);
 };
 
 const handleSubmit = async (e) => {
@@ -109,12 +133,15 @@ fontFamily: "Arial"
       />
 
       <input
-        name="price"
-        value={formData.price}
-        placeholder="Expected Price"
-        onChange={handleChange}
-        style={inputStyle}
-      />
+  name="price"
+  value={formData.price}
+  placeholder="AI Estimated Price"
+  readOnly
+  style={inputStyle}
+/>
+<p style={{ color: "#22c55e", marginTop: "-8px", marginBottom: "16px" }}>
+  AI Recommended Price: ₹{formData.price || 0}
+</p>
 
       <input
         name="location"
