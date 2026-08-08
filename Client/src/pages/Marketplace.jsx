@@ -41,6 +41,26 @@ return matchesSearch && matchesCategory;
 ```
 
 });
+const handleDelete = async (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this listing?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await axios.delete(
+      `https://waste2value-backend.onrender.com/api/listings/${id}`
+    );
+
+    setListings((prev) => prev.filter((item) => item._id !== id));
+
+    alert("Listing deleted successfully!");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete listing");
+  }
+};
 
 return (
 <div
@@ -130,6 +150,22 @@ fontFamily: "Arial"
             </p>
             <p><strong>Location:</strong> {item.location}</p>
             <p><strong>Status:</strong> {item.status}</p>
+            <button
+  onClick={() => handleDelete(item._id)}
+  style={{
+    marginTop: "15px",
+    width: "100%",
+    padding: "10px",
+    border: "none",
+    borderRadius: "10px",
+    background: "#ef4444",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer"
+  }}
+>
+  Delete Listing
+</button>
           </div>
         ))}
       </div>
