@@ -1,67 +1,98 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 
-function App() {
-return (
-<div
-style={{
-minHeight: "100vh",
-background: "#0f172a",
-color: "white",
-fontFamily: "Arial"
-}}
-> <Navbar />
+import Home from "./pages/Home";
+import Marketplace from "./pages/Marketplace";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
+import AddWaste from "./pages/AddWaste";
+import Wishlist from "./pages/Wishlist";
+import MyOffers from "./pages/MyOffers";
+import ReceivedOffers from "./pages/ReceivedOffers";
 
+export default function App() {
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        width: "100%",
+        background: "#0f172a",
+        overflowX: "hidden",
+        boxSizing: "border-box",
+      }}
+    >
+      {/* SIDEBAR */}
+      <Navbar />
 
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      textAlign: "center",
-      padding: "40px",
-      minHeight: "calc(100vh - 80px)"
-    }}
-  >
-    <div>
-      <h1
+      {/* =========================
+          CONTENT AREA
+      ========================= */}
+      <div
         style={{
-          fontSize: "3rem",
-          color: "#22c55e"
+          marginLeft: "250px",
+          width: "calc(100% - 250px)",
+          minHeight: "100vh",
+
+          boxSizing: "border-box",
+
+          background: "#0f172a",
+
+          overflowX: "hidden",
         }}
       >
-        Waste2Value Exchange
-      </h1>
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-      <p
-        style={{
-          fontSize: "1.2rem",
-          maxWidth: "700px",
-          margin: "20px auto"
-        }}
-      >
-        AI-powered circular economy platform that transforms waste into valuable
-        resources by connecting sellers, recyclers and industries.
-      </p>
+          <Route
+            path="/marketplace"
+            element={<Marketplace />}
+          />
 
-      <button
-        style={{
-          background: "#22c55e",
-          border: "none",
-          padding: "14px 30px",
-          borderRadius: "12px",
-          fontWeight: "bold",
-          cursor: "pointer"
-        }}
-      >
-        Explore Marketplace
-      </button>
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+
+          <Route
+            path="/profile"
+            element={<Profile />}
+          />
+
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+
+          <Route
+            path="/add-waste"
+            element={<AddWaste />}
+          />
+
+          <Route
+            path="/wishlist"
+            element={<Wishlist />}
+          />
+
+          <Route
+            path="/my-offers"
+            element={<MyOffers />}
+          />
+
+          <Route
+            path="/received-offers"
+            element={<ReceivedOffers />}
+          />
+        </Routes>
+      </div>
     </div>
-  </div>
-</div>
-
-
-);
+  );
 }
-
-export default App;

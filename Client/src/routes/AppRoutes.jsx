@@ -1,20 +1,78 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import App from "../App";
-import Dashboard from "../pages/Dashboard";
+import Home from "../pages/Home";
 import Marketplace from "../pages/Marketplace";
 import AddWaste from "../pages/AddWaste";
+import Profile from "../pages/Profile";
+import MyOffers from "../pages/MyOffers";
+import ReceivedOffers from "../pages/ReceivedOffers";
+import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
+import Register from "../pages/Register";
+import Wishlist from "../pages/Wishlist";
 
-function AppRoutes() {
-return ( <BrowserRouter> <Routes>
-<Route path="/" element={<App />} />
-<Route path="/dashboard" element={<Dashboard />} />
-<Route path="/marketplace" element={<Marketplace />} />
-<Route path="/add-waste" element={<AddWaste />} />
-<Route path="/login" element={<Login />} /> </Routes> </BrowserRouter>
-);
+export default function AppRoutes() {
+  return (
+    <Routes>
+      {/* HOME */}
+      <Route
+        path="/"
+        element={<Home />}
+      />
+
+      {/* MARKETPLACE */}
+      <Route
+        path="/marketplace"
+        element={<Marketplace />}
+      />
+
+      {/* ADD WASTE */}
+      <Route
+        path="/add-waste"
+        element={<AddWaste />}
+      />
+
+      {/* DASHBOARD */}
+      <Route
+        path="/dashboard"
+        element={<Dashboard />}
+      />
+
+      {/* MY OFFERS */}
+      <Route
+        path="/my-offers"
+        element={<MyOffers />}
+      />
+
+      {/* RECEIVED OFFERS */}
+      <Route
+        path="/received-offers"
+        element={<ReceivedOffers />}
+      />
+
+      {/* PROFILE */}
+      <Route
+        path="/profile"
+        element={<Profile />}
+      />
+
+      {/* LOGIN */}
+      <Route
+        path="/login"
+        element={<Login />}
+      />
+
+      {/* REGISTER */}
+      <Route
+        path="/register"
+        element={<Register />}
+      />
+
+      {/* WISHLIST */}
+      <Route
+        path="/wishlist"
+        element={<Wishlist />}
+      />
+    </Routes>
+  );
 }
-
-export default AppRoutes;
