@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/home";
 import Marketplace from "../pages/Marketplace";
 import AddWaste from "../pages/AddWaste";
-import Profile from "../pages/Profile";
+import Profile from "../pages/profile";
 import MyOffers from "../pages/MyOffers";
 import ReceivedOffers from "../pages/ReceivedOffers";
 import Dashboard from "../pages/Dashboard";
