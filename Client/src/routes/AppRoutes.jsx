@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "../pages/Home";
+import Home from "../pages/home";
 import Marketplace from "../pages/Marketplace";
 import AddWaste from "../pages/AddWaste";
 import Profile from "../pages/Profile";
