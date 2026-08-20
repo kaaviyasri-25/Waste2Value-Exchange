@@ -1,6 +1,5 @@
 # ♻️ Waste2Value Exchange
-Prototype Video:https://drive.google.com/drive/u/0/home
-
+https://drive.google.com/file/d/1-gVewvXg1SI4wN-5aqYRhP1o1Ki7ps5B/view?usp=drive_link
 ### Smart Recycling Marketplace
 
 Waste2Value Exchange is a smart web-based recycling marketplace that connects **waste sellers and buyers** on a single digital platform.
